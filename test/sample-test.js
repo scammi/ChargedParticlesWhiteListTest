@@ -20,7 +20,7 @@ describe("Charged Particles whitelist ", function () {
     expect(contractResponse).to.be.equal(chargedParticlesMainnetAddress.chargedState.address)
   });
 
-  it ("Become admin !", async() => {
+  it ("Become admin and whitelist custom token.", async() => {
     // Deploy custom NFT
     const CustomNFT = await ethers.getContractFactory("CustomToken"); 
     const customNFT = await CustomNFT.deploy();
@@ -31,7 +31,8 @@ describe("Charged Particles whitelist ", function () {
     // this should revert since you are not the admin
     const [ signer ] = await ethers.getSigners();
     
-    await expect(ChargedSettingContract.connect(signer).enableNftContracts([customNFTdeployedAddress])).to.be.revertedWith('Ownable: caller is not the owner');
+    await expect(ChargedSettingContract.connect(signer).enableNftContracts([customNFTdeployedAddress])).to
+      .be.revertedWith('Ownable: caller is not the owner');
 
     // Get Charged Particle owner address
     const adminAddress = await ChargedParticlesContract.connect(provider).owner();
