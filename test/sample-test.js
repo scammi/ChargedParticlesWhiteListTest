@@ -24,13 +24,13 @@ describe("Charged Particles whitelist ", function () {
     // Deploy custom NFT
     const CustomNFT = await ethers.getContractFactory("CustomToken"); 
     const customNFT = await CustomNFT.deploy();
-    const deployed = await customNFT.deployed();
+    const customNFTdeployed = await customNFT.deployed();
 
-    const deploymentAddress = deployed.address;
+    const customNFTdeployedAddress = deployed.address;
 
     // this should revert since you are not the admin
     // const [ signer ] = await ethers.getSigners();
-    // const whiteList = await ChargedSettingContract.connect(signer).enableNftContracts([deploymentAddress])
+    // const whiteList = await ChargedSettingContract.connect(signer).enableNftContracts([customNFTdeployedAddress])
     
     // Get Charged Particle owner address
     const adminAddress = await ChargedParticlesContract.connect(provider).owner();
@@ -43,7 +43,7 @@ describe("Charged Particles whitelist ", function () {
 
     // Whitelist custom NFT
     const owner = await ethers.getSigner(adminAddress);
-    const whiteList = await ChargedSettingContract.connect(owner).enableNftContracts([deploymentAddress])
+    const whiteList = await ChargedSettingContract.connect(owner).enableNftContracts([customNFTdeployedAddress])
     await whiteList.wait();
 
     console.log(whiteList)
