@@ -41,7 +41,7 @@ describe("Charged Particles whitelist ", function () {
       params: [adminAddress],
     });
 
-    // White list custom NFT
+    // Whitelist custom NFT
     const owner = await ethers.getSigner(adminAddress);
     const whiteList = await ChargedSettingContract.connect(owner).enableNftContracts([deploymentAddress])
     await whiteList.wait();
