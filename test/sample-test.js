@@ -29,9 +29,10 @@ describe("Charged Particles whitelist ", function () {
     const customNFTdeployedAddress = customNFTdeployed.address;
 
     // this should revert since you are not the admin
-    // const [ signer ] = await ethers.getSigners();
-    // const whiteList = await ChargedSettingContract.connect(signer).enableNftContracts([customNFTdeployedAddress])
+    const [ signer ] = await ethers.getSigners();
     
+    await expect(ChargedSettingContract.connect(signer).enableNftContracts([customNFTdeployedAddress])).to.be.revertedWith('Ownable: caller is not the owner');
+
     // Get Charged Particle owner address
     const adminAddress = await ChargedParticlesContract.connect(provider).owner();
 
@@ -43,9 +44,11 @@ describe("Charged Particles whitelist ", function () {
 
     // Whitelist custom NFT
     const owner = await ethers.getSigner(adminAddress);
-    const whiteList = await ChargedSettingContract.connect(owner).enableNftContracts([customNFTdeployedAddress])
-    await whiteList.wait();
+    const whiteListTx = await ChargedSettingContract.connect(owner).enableNftContracts([customNFTdeployedAddress]);
+    await whiteListTx.wait();
 
-    console.log(whiteList)
+    console.log(whiteListTx)
+
+
   });
 });
