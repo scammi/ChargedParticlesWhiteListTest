@@ -48,7 +48,5 @@ describe("Charged Particles whitelist ", function () {
     await whiteListTx.wait();
 
     console.log(whiteListTx)
-
-
   });
 });
