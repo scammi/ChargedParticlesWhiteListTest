@@ -26,7 +26,7 @@ describe("Charged Particles whitelist ", function () {
     const customNFT = await CustomNFT.deploy();
     const customNFTdeployed = await customNFT.deployed();
 
-    const customNFTdeployedAddress = deployed.address;
+    const customNFTdeployedAddress = customNFTdeployed.address;
 
     // this should revert since you are not the admin
     // const [ signer ] = await ethers.getSigners();
