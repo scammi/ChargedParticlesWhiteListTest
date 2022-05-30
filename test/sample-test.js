@@ -35,7 +35,7 @@ describe("Charged Particles whitelist ", function () {
     // Get Charged Particle owner address
     const adminAddress = await ChargedParticlesContract.connect(provider).owner();
 
-    // impersonate adming account 
+    // impersonate admin account 
     await hre.network.provider.request({
       method: "hardhat_impersonateAccount",
       params: [adminAddress],
